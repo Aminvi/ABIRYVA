@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <url>
-    <loc>https://www.abiryva.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://www.abiryva.com/</loc></url>
+  <url><loc>https://www.abiryva.com/index.html</loc></url>
+  <url><loc>https://www.abiryva.com/about.html</loc></url>
+  <url><loc>https://www.abiryva.com/services.html</loc></url>
+  <url><loc>https://www.abiryva.com/service-single.html</loc></url>
+  <url><loc>https://www.abiryva.com/contact.html</loc></url>
+  <url><loc>https://www.abiryva.com/blog.html</loc></url>
+  <url><loc>https://www.abiryva.com/blog-single.html</loc></url>
+  <url><loc>https://www.abiryva.com/aws.html</loc></url>
+  <url><loc>https://www.abiryva.com/dataai.html</loc></url>
+  <url><loc>https://www.abiryva.com/dataana.html</loc></url>
+  <url><loc>https://www.abiryva.com/gov.html</loc></url>
+  <url><loc>https://www.abiryva.com/partner.html</loc></url>
+  <url><loc>https://www.abiryva.com/single3.html</loc></url>
+  <url><loc>https://www.abiryva.com/single4.html</loc></url>
+  <url><loc>https://www.abiryva.com/single5.html</loc></url>
+  <url><loc>https://www.abiryva.com/single6.html</loc></url>
+  <url><loc>https://www.abiryva.com/single7.html</loc></url>
+  <url><loc>https://www.abiryva.com/single8.html</loc></url>
+  <url><loc>https://www.abiryva.com/sinngle2.html</loc></url>
 
 </urlset>
