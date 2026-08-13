@@ -1755,6 +1755,7 @@ content="Abiryva Technology Limited provides cybersecurity, AI, cloud computing,
 
 
 <!-- Cookie Banner Start -->
+<!-- Cookie Banner -->
 <div id="cookie-banner" class="cookie-banner">
 
     <div class="cookie-content">
@@ -1776,7 +1777,7 @@ content="Abiryva Technology Limited provides cybersecurity, AI, cloud computing,
 
             <button
                 type="button"
-                onclick="acceptCookies()"
+                id="accept-cookies"
                 class="cookie-btn">
                 Accept
             </button>
@@ -1786,45 +1787,113 @@ content="Abiryva Technology Limited provides cybersecurity, AI, cloud computing,
     </div>
 
 </div>
+
+<!-- Cookie Banner -->
+<!-- Cookie Banner -->
+<!-- =========================
+     COOKIE CONSENT
+========================= -->
+
+
 <!-- Cookie Banner End -->
 
 
-<script>
-function acceptCookies() {
-    localStorage.setItem("cookiesAccepted", "true");
-
-    const cookieBanner = document.getElementById("cookie-banner");
-
-    if (cookieBanner) {
-        cookieBanner.classList.add("cookie-hidden");
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const cookieBanner = document.getElementById("cookie-banner");
-
-    if (!cookieBanner) {
-        return;
-    }
-
-    const cookiesAccepted =
-        localStorage.getItem("cookiesAccepted");
-
-    if (cookiesAccepted === "true") {
-        cookieBanner.classList.add("cookie-hidden");
-    } else {
-        cookieBanner.classList.remove("cookie-hidden");
-    }
-
-});
-</script>
                     </div>
                 </div>
             </div>
             <!-- Footer Copyright Section End -->
         </div>
     </footer>
+    <!-- =========================================
+     COOKIE BANNER
+========================================= -->
+
+<div id="cookie-banner">
+
+    <div class="cookie-inner">
+
+        <div class="cookie-message">
+            <strong>We use cookies</strong>
+
+            <p>
+                We use cookies to improve your experience on our website.
+            </p>
+        </div>
+
+        <div class="cookie-actions">
+
+            <a href="cookie-policy.html">
+                Cookie Policy
+            </a>
+
+            <button type="button" onclick="acceptAbiryvaCookies()">
+                Accept
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+function acceptAbiryvaCookies() {
+
+    // Save acceptance
+    try {
+        localStorage.setItem(
+            "abiryvaCookiesAccepted",
+            "yes"
+        );
+    } catch (error) {
+        console.log("Could not save cookie preference.");
+    }
+
+    // Remove the banner immediately
+    var banner = document.getElementById("cookie-banner");
+
+    if (banner) {
+        banner.remove();
+    }
+}
+
+
+/*
+ * Check cookie preference when page loads
+ */
+
+(function () {
+
+    var banner = document.getElementById("cookie-banner");
+
+    if (!banner) {
+        return;
+    }
+
+    try {
+
+        var accepted =
+            localStorage.getItem(
+                "abiryvaCookiesAccepted"
+            );
+
+        if (accepted === "yes") {
+
+            banner.remove();
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Cookie preference could not be checked."
+        );
+
+    }
+
+})();
+</script>
     <!-- Footer Section End -->
 
     <!-- Jquery Library File -->
