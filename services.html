@@ -210,7 +210,7 @@
                             <a href="partner.html"
                                 class="header-cta">
 
-                                Talk to an Advisor
+                                Partner with Us
 
                                 <i class="fa-solid fa-arrow-right"></i>
 
@@ -2649,8 +2649,55 @@
          COOKIE BANNER
     ========================================================== -->
 
-  
-              
+    <div id="cookie-banner"
+        class="cookie-banner"
+        role="dialog"
+        aria-label="Cookie notice">
+
+        <div class="cookie-content">
+
+            <div class="cookie-icon">
+
+                <i class="fa-solid fa-cookie-bite"></i>
+
+            </div>
+
+
+            <div class="cookie-text">
+
+                <strong>
+                    We value your privacy
+                </strong>
+
+                <p>
+
+                    We use cookies to improve your browsing experience.
+                    By continuing to use this website, you agree to our
+                    cookie policy.
+
+                </p>
+
+            </div>
+
+
+            <div class="cookie-actions">
+
+                <a href="cookie-policy.html">
+                    Cookie Policy
+                </a>
+
+                <button type="button"
+                    id="accept-cookies">
+
+                    Accept
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 
     <!-- =========================================================
@@ -2696,7 +2743,55 @@
          COOKIE SCRIPT
     ========================================================== -->
 
-   
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const cookieBanner =
+                document.getElementById("cookie-banner");
+
+            const acceptButton =
+                document.getElementById("accept-cookies");
+
+
+            /*
+             * Check if the visitor has already
+             * accepted the cookie notice.
+             */
+
+            const cookiesAccepted =
+                localStorage.getItem("abiryvaCookiesAccepted");
+
+
+            if (cookiesAccepted === "true") {
+
+                cookieBanner.classList.add("cookie-hidden");
+
+            }
+
+
+            /*
+             * Accept cookies.
+             */
+
+            acceptButton.addEventListener("click", function () {
+
+                localStorage.setItem(
+                    "abiryvaCookiesAccepted",
+                    "true"
+                );
+
+
+                cookieBanner.classList.add(
+                    "cookie-hidden"
+                );
+
+            });
+
+        });
+
+    </script>
+
 
     <!-- =========================================================
          SERVICE ACCORDION
