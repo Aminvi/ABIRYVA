@@ -1,48 +1,5 @@
-/* ----------------------------------------------------------------------------------------
-* Author        : Awaiken
-* Template Name :  Abiryva Technology Limited
-* File          : Css File
-* Version       : 1.0
-* ---------------------------------------------------------------------------------------- */
-/* INDEX
-----------------------------------------------------------------------------------------
-01. Global Variables
-02. General Css
-03. Header Css
-04. Hero Css
-05. About Us Css
-06. Our Services Css
-07. Why Choose Us Css
-08. Our Feature Css
-09. Fact Counter Css
-10. What We Do Css
-11. How It Work Css
-12. Our Pricing Css
-13. Our FAQs Css
-14. Our Testimonial Css
-15. Our Blog Css
-16. Footer Css
-17. About Us Page Css
-18. Services Page Css
-19. Service Single Css
-20. Blog Archive Css
-21. Blog Single Css
-22. Team Page Css
-23. Team Single Css
-24. Pricing Page Css
-25. Client Page Css
-26. Testimonial Page Css
-27. Image Gallery Css
-28. Video Gallery Css
-29. FAQs Page Css
-30. Contact Page Css
-31. 404 Error Page Css
-32. Responsive Css
--------------------------------------------------------------------------------------- */
 
-/************************************/
-/*** 	 01. Global Variables	  ***/
-/************************************/	
+
 
 :root{
 	--primary-color			: #040303;
@@ -6854,4 +6811,455 @@ footer.main-footer{
 	.google-map-iframe iframe{
         height: 350px;
     }
+}
+
+/* =========================================================
+   TECHNOLOGIES & FRAMEWORKS
+   ========================================================= */
+
+.technologies-section {
+    padding: 100px 0;
+}
+
+.technologies-section .section-title {
+    margin-bottom: 45px;
+}
+
+.technologies-section .section-title h2 {
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   TECHNOLOGY CARD
+   ========================================================= */
+
+.tech-accordion-item {
+    height: auto;
+    margin-bottom: 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    transition: all 0.35s ease;
+}
+
+
+/* =========================================================
+   REMOVE DEFAULT DETAILS MARKER
+   ========================================================= */
+
+.tech-accordion-item summary {
+    list-style: none;
+}
+
+.tech-accordion-item summary::-webkit-details-marker {
+    display: none;
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+.tech-accordion-item summary {
+    min-height: 145px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 25px;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    transition: all 0.35s ease;
+}
+
+
+/* =========================================================
+   ICON + TEXT
+   ========================================================= */
+
+.tech-category {
+    display: flex;
+    align-items: center;
+
+    gap: 17px;
+
+    flex: 1;
+}
+
+.tech-category-icon {
+    width: 52px;
+    height: 52px;
+
+    min-width: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f4f4f4;
+
+    color: #000000;
+
+    font-size: 20px;
+
+    transition: all 0.35s ease;
+}
+
+
+.tech-category-text {
+    flex: 1;
+}
+
+.tech-category-text h3 {
+    margin: 0 0 7px;
+
+    color: #000000;
+
+    font-size: 19px;
+
+    line-height: 1.3;
+
+    font-weight: 600;
+
+    transition: color 0.35s ease;
+}
+
+.tech-category-text span {
+    display: block;
+
+    color: #333333;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    transition: color 0.35s ease;
+}
+
+
+/* =========================================================
+   ARROW
+   ========================================================= */
+
+.tech-arrow {
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f4f4f4;
+
+    color: #000000;
+
+    transition: all 0.35s ease;
+}
+
+.tech-arrow i {
+    font-size: 12px;
+
+    transition: transform 0.35s ease;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.tech-accordion-item:hover {
+    border-color: #022857;
+
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 30px rgba(2, 40, 87, 0.15);
+}
+
+
+.tech-accordion-item:hover summary {
+    background: #022857;
+}
+
+
+.tech-accordion-item:hover .tech-category-icon {
+    background: #ffffff;
+
+    color: #022857;
+}
+
+
+.tech-accordion-item:hover .tech-category-text h3 {
+    color: #ffffff;
+}
+
+
+.tech-accordion-item:hover .tech-category-text span {
+    color: #ffffff;
+}
+
+
+.tech-accordion-item:hover .tech-arrow {
+    background: #ffffff;
+
+    color: #022857;
+}
+
+
+/* =========================================================
+   OPEN STATE
+   ========================================================= */
+
+.tech-accordion-item[open] {
+    border-color: #022857;
+
+    box-shadow: 0 12px 30px rgba(2, 40, 87, 0.12);
+}
+
+
+/*
+   Keep the header blue while the dropdown is open
+*/
+
+.tech-accordion-item[open] summary {
+    background: #022857;
+}
+
+
+.tech-accordion-item[open] .tech-category-icon {
+    background: #ffffff;
+
+    color: #022857;
+}
+
+
+.tech-accordion-item[open] .tech-category-text h3 {
+    color: #ffffff;
+}
+
+
+.tech-accordion-item[open] .tech-category-text span {
+    color: #ffffff;
+}
+
+
+.tech-accordion-item[open] .tech-arrow {
+    background: #ffffff;
+
+    color: #022857;
+}
+
+
+.tech-accordion-item[open] .tech-arrow i {
+    transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   DROPDOWN CONTENT
+   ========================================================= */
+
+.tech-accordion-content {
+    padding: 25px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #e8e8e8;
+
+    animation: techAccordionOpen 0.3s ease;
+}
+
+
+@keyframes techAccordionOpen {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   TECHNOLOGY LIST
+   ========================================================= */
+
+.tech-accordion-content ul {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px 25px;
+
+    margin: 0;
+
+    padding: 0;
+
+    list-style: none;
+}
+
+
+.tech-accordion-content ul li {
+    position: relative;
+
+    padding-left: 20px;
+
+    color: #333333;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+.tech-accordion-content ul li::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 9px;
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #022857;
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.tech-accordion-item summary:focus-visible {
+    outline: 2px solid #022857;
+
+    outline-offset: -2px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media only screen and (max-width: 991px) {
+
+    .technologies-section {
+        padding: 80px 0;
+    }
+
+    .tech-accordion-item summary {
+        min-height: 140px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media only screen and (max-width: 767px) {
+
+    .technologies-section {
+        padding: 70px 0;
+    }
+
+    .technologies-section .section-title {
+        margin-bottom: 30px;
+    }
+
+    .tech-accordion-item {
+        margin-bottom: 20px;
+    }
+
+    .tech-accordion-item summary {
+        min-height: auto;
+
+        padding: 20px;
+    }
+
+    .tech-category {
+        gap: 12px;
+    }
+
+    .tech-category-icon {
+        width: 45px;
+        height: 45px;
+
+        min-width: 45px;
+
+        font-size: 17px;
+    }
+
+    .tech-category-text h3 {
+        font-size: 16px;
+    }
+
+    .tech-category-text span {
+        font-size: 12px;
+    }
+
+    .tech-arrow {
+        width: 30px;
+        height: 30px;
+
+        min-width: 30px;
+    }
+
+    .tech-accordion-content {
+        padding: 20px;
+    }
+
+    .tech-accordion-content ul {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media only screen and (max-width: 480px) {
+
+    .tech-category-text span {
+        display: none;
+    }
+
+    .tech-category-text h3 {
+        font-size: 15px;
+    }
+
 }
