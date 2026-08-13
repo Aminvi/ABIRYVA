@@ -1,5 +1,48 @@
+/* ----------------------------------------------------------------------------------------
+* Author        : Awaiken
+* Template Name :  Abiryva Technology Limited
+* File          : Css File
+* Version       : 1.0
+* ---------------------------------------------------------------------------------------- */
+/* INDEX
+----------------------------------------------------------------------------------------
+01. Global Variables
+02. General Css
+03. Header Css
+04. Hero Css
+05. About Us Css
+06. Our Services Css
+07. Why Choose Us Css
+08. Our Feature Css
+09. Fact Counter Css
+10. What We Do Css
+11. How It Work Css
+12. Our Pricing Css
+13. Our FAQs Css
+14. Our Testimonial Css
+15. Our Blog Css
+16. Footer Css
+17. About Us Page Css
+18. Services Page Css
+19. Service Single Css
+20. Blog Archive Css
+21. Blog Single Css
+22. Team Page Css
+23. Team Single Css
+24. Pricing Page Css
+25. Client Page Css
+26. Testimonial Page Css
+27. Image Gallery Css
+28. Video Gallery Css
+29. FAQs Page Css
+30. Contact Page Css
+31. 404 Error Page Css
+32. Responsive Css
+-------------------------------------------------------------------------------------- */
 
-
+/************************************/
+/*** 	 01. Global Variables	  ***/
+/************************************/	
 
 :root{
 	--primary-color			: #040303;
@@ -7260,6 +7303,871 @@ footer.main-footer{
 
     .tech-category-text h3 {
         font-size: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   ABIRYVA SERVICES DROPDOWN
+   ========================================================= */
+
+
+/* =========================================================
+   SERVICES GRID
+   ========================================================= */
+
+.services-dropdown-row {
+    row-gap: 30px;
+}
+
+
+/* =========================================================
+   SERVICE DROPDOWN CARD
+   ========================================================= */
+
+.service-dropdown {
+    width: 100%;
+    height: auto;
+
+    margin: 0;
+
+    padding: 0;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        transform 0.35s ease;
+}
+
+
+/* Remove browser default arrow */
+
+.service-dropdown summary {
+    list-style: none;
+}
+
+.service-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+
+/* =========================================================
+   SERVICE HEADER
+   ========================================================= */
+
+.service-dropdown > summary {
+    min-height: 145px;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 25px;
+
+    margin: 0;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    transition: background 0.35s ease;
+}
+
+
+/* =========================================================
+   SERVICE TITLE AREA
+   ========================================================= */
+
+.service-dropdown-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   SERVICE NUMBER
+   ========================================================= */
+
+.service-dropdown .service-number {
+    width: 52px;
+
+    height: 52px;
+
+    min-width: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f3f3f3;
+
+    color: #000000;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    transition:
+        background 0.35s ease,
+        color 0.35s ease;
+}
+
+
+/* =========================================================
+   SERVICE TITLE
+   ========================================================= */
+
+.service-dropdown-title h2 {
+    margin: 0 0 7px 0;
+
+    color: #000000;
+
+    font-size: 20px;
+
+    font-weight: 600;
+
+    line-height: 1.3;
+
+    transition: color 0.35s ease;
+}
+
+
+.service-dropdown-title p {
+    margin: 0;
+
+    color: #333333;
+
+    font-size: 13px;
+
+    font-weight: 400;
+
+    line-height: 1.5;
+
+    transition: color 0.35s ease;
+}
+
+
+/* =========================================================
+   CHEVRON
+   ========================================================= */
+
+.service-dropdown-arrow {
+    width: 38px;
+
+    height: 38px;
+
+    min-width: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f3f3f3;
+
+    color: #000000;
+
+    transition:
+        background 0.35s ease,
+        color 0.35s ease;
+}
+
+
+.service-dropdown-arrow i {
+    font-size: 12px;
+
+    transition: transform 0.35s ease;
+}
+
+
+/* =========================================================
+   HOVER STATE
+   ========================================================= */
+
+.service-dropdown:hover {
+
+    border-color: #022857;
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 12px 30px rgba(2, 40, 87, 0.12);
+}
+
+
+.service-dropdown:hover > summary {
+
+    background: #022857;
+}
+
+
+.service-dropdown:hover .service-number {
+
+    background: #ffffff;
+
+    color: #022857;
+}
+
+
+.service-dropdown:hover .service-dropdown-title h2 {
+
+    color: #ffffff;
+}
+
+
+.service-dropdown:hover .service-dropdown-title p {
+
+    color: #ffffff;
+}
+
+
+.service-dropdown:hover .service-dropdown-arrow {
+
+    background: #ffffff;
+
+    color: #022857;
+}
+
+
+/* =========================================================
+   OPEN STATE
+   ========================================================= */
+
+.service-dropdown[open] {
+
+    border-color: #022857;
+
+    box-shadow: 0 12px 30px rgba(2, 40, 87, 0.12);
+}
+
+
+.service-dropdown[open] > summary {
+
+    background: #022857;
+}
+
+
+.service-dropdown[open] .service-number {
+
+    background: #ffffff;
+
+    color: #022857;
+}
+
+
+.service-dropdown[open] .service-dropdown-title h2 {
+
+    color: #ffffff;
+}
+
+
+.service-dropdown[open] .service-dropdown-title p {
+
+    color: #ffffff;
+}
+
+
+.service-dropdown[open] .service-dropdown-arrow {
+
+    background: #ffffff;
+
+    color: #022857;
+}
+
+
+.service-dropdown[open] .service-dropdown-arrow i {
+
+    transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   SERVICE CONTENT
+   ========================================================= */
+
+.service-dropdown-content {
+
+    padding: 30px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #eeeeee;
+
+    animation: serviceDropdownOpen 0.3s ease;
+}
+
+
+@keyframes serviceDropdownOpen {
+
+    0% {
+
+        opacity: 0;
+
+        transform: translateY(-8px);
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   SERVICE DESCRIPTION
+   ========================================================= */
+
+.service-dropdown-content > p {
+
+    margin: 0 0 25px 0;
+
+    color: #555555;
+
+    font-size: 15px;
+
+    font-weight: 400;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   SERVICE CONTENT HEADINGS
+   ========================================================= */
+
+.service-dropdown-content h4 {
+
+    margin-top: 25px;
+
+    margin-bottom: 15px;
+
+    color: #022857;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   SERVICES LIST
+   ========================================================= */
+
+.service-dropdown-content ul {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    column-gap: 25px;
+
+    row-gap: 10px;
+
+    margin: 0;
+
+    padding: 0;
+
+    list-style: none;
+}
+
+
+.service-dropdown-content ul li {
+
+    position: relative;
+
+    margin: 0;
+
+    padding-left: 18px;
+
+    color: #333333;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+.service-dropdown-content ul li::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 9px;
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #022857;
+}
+
+
+/* =========================================================
+   DELIVERABLES
+   ========================================================= */
+
+.service-dropdown-content .service-deliverables {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin: 0;
+
+    padding: 0;
+}
+
+
+.service-dropdown-content .service-deliverables span {
+
+    display: inline-block;
+
+    padding: 8px 12px;
+
+    background: #f4f6f8;
+
+    border-radius: 4px;
+
+    color: #333333;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    line-height: 1.4;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+
+.service-dropdown-content .service-deliverables span:hover {
+
+    background: #022857;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+   ========================================================= */
+
+.service-dropdown summary:focus-visible {
+
+    outline: 2px solid #022857;
+
+    outline-offset: -2px;
+}
+
+
+/* =========================================================
+   FOOTER PHONE DROPDOWN
+   ========================================================= */
+
+.footer-phone-dropdown {
+
+    position: relative;
+
+    width: 100%;
+}
+
+
+/* Remove browser marker */
+
+.footer-phone-dropdown summary {
+
+    list-style: none;
+}
+
+.footer-phone-dropdown summary::-webkit-details-marker {
+
+    display: none;
+}
+
+
+/* =========================================================
+   FOOTER PHONE HEADER
+   ========================================================= */
+
+.footer-phone-dropdown > summary {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    width: 100%;
+
+    cursor: pointer;
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    transition: color 0.3s ease;
+}
+
+
+/* =========================================================
+   FOOTER PHONE ARROW
+   ========================================================= */
+
+.footer-phone-dropdown > summary i {
+
+    font-size: 12px;
+
+    color: #ffffff;
+
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* Rotate arrow */
+
+.footer-phone-dropdown[open] > summary i {
+
+    transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   FOOTER PHONE OPTIONS
+   ========================================================= */
+
+.footer-phone-options {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    margin-top: 15px;
+
+    animation: footerPhoneOpen 0.25s ease;
+}
+
+
+@keyframes footerPhoneOpen {
+
+    0% {
+
+        opacity: 0;
+
+        transform: translateY(-8px);
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   FOOTER PHONE LINK
+   ========================================================= */
+
+.footer-phone-options a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: fit-content;
+
+    color: #ffffff !important;
+
+    text-decoration: none !important;
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+    line-height: 1.5;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* =========================================================
+   FOOTER FLAG
+   ========================================================= */
+
+.phone-flag {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 21px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   FOOTER PHONE HOVER
+   ========================================================= */
+
+.footer-phone-options a:hover {
+
+    color: #022857 !important;
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   EMAIL LINK
+   ========================================================= */
+
+.footer-contact-item h3 a {
+
+    color: inherit;
+
+    text-decoration: none;
+
+    transition: color 0.25s ease;
+}
+
+
+.footer-contact-item h3 a:hover {
+
+    color: #022857;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media only screen and (max-width: 991px) {
+
+    .service-dropdown > summary {
+
+        min-height: 140px;
+
+        padding: 22px;
+
+    }
+
+
+    .service-dropdown-title h2 {
+
+        font-size: 19px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media only screen and (max-width: 767px) {
+
+    .services-dropdown-row {
+
+        row-gap: 20px;
+
+    }
+
+
+    .service-dropdown > summary {
+
+        min-height: auto;
+
+        padding: 20px;
+
+    }
+
+
+    .service-dropdown-title {
+
+        gap: 12px;
+
+    }
+
+
+    .service-dropdown .service-number {
+
+        width: 45px;
+
+        height: 45px;
+
+        min-width: 45px;
+
+        font-size: 13px;
+
+    }
+
+
+    .service-dropdown-title h2 {
+
+        font-size: 17px;
+
+        line-height: 1.35;
+
+    }
+
+
+    .service-dropdown-title p {
+
+        font-size: 12px;
+
+    }
+
+
+    .service-dropdown-arrow {
+
+        width: 32px;
+
+        height: 32px;
+
+        min-width: 32px;
+
+    }
+
+
+    .service-dropdown-content {
+
+        padding: 20px;
+
+    }
+
+
+    .service-dropdown-content > p {
+
+        font-size: 14px;
+
+    }
+
+
+    .service-dropdown-content ul {
+
+        grid-template-columns: 1fr;
+
+        row-gap: 9px;
+
+    }
+
+
+    .service-dropdown-content ul li {
+
+        font-size: 13px;
+
+    }
+
+
+    .footer-phone-options a {
+
+        font-size: 15px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media only screen and (max-width: 480px) {
+
+    .service-dropdown-title p {
+
+        display: none;
+
+    }
+
+
+    .service-dropdown-title h2 {
+
+        font-size: 16px;
+
+    }
+
+
+    .service-dropdown > summary {
+
+        padding: 17px;
+
+    }
+
+
+    .service-dropdown-content {
+
+        padding: 17px;
+
     }
 
 }
