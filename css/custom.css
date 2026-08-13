@@ -1,48 +1,3 @@
-/* ----------------------------------------------------------------------------------------
-* Author        : Awaiken
-* Template Name :  Abiryva Technology Limited
-* File          : Css File
-* Version       : 1.0
-* ---------------------------------------------------------------------------------------- */
-/* INDEX
-----------------------------------------------------------------------------------------
-01. Global Variables
-02. General Css
-03. Header Css
-04. Hero Css
-05. About Us Css
-06. Our Services Css
-07. Why Choose Us Css
-08. Our Feature Css
-09. Fact Counter Css
-10. What We Do Css
-11. How It Work Css
-12. Our Pricing Css
-13. Our FAQs Css
-14. Our Testimonial Css
-15. Our Blog Css
-16. Footer Css
-17. About Us Page Css
-18. Services Page Css
-19. Service Single Css
-20. Blog Archive Css
-21. Blog Single Css
-22. Team Page Css
-23. Team Single Css
-24. Pricing Page Css
-25. Client Page Css
-26. Testimonial Page Css
-27. Image Gallery Css
-28. Video Gallery Css
-29. FAQs Page Css
-30. Contact Page Css
-31. 404 Error Page Css
-32. Responsive Css
--------------------------------------------------------------------------------------- */
-
-/************************************/
-/*** 	 01. Global Variables	  ***/
-/************************************/	
 
 :root{
 	--primary-color			: #040303;
@@ -8170,4 +8125,468 @@ footer.main-footer{
 
     }
 
+}
+
+/* =========================================
+   MAIN FOOTER
+========================================= */
+
+.main-footer {
+    background: #0b0d0f;
+    color: #ffffff;
+    padding: 80px 0 0;
+}
+
+
+/* =========================================
+   FOOTER TOP
+========================================= */
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 0.8fr 0.8fr 1.5fr;
+    gap: 60px;
+    padding-bottom: 60px;
+}
+
+
+/* =========================================
+   FOOTER BRAND
+========================================= */
+
+.footer-brand {
+    max-width: 360px;
+}
+
+.footer-logo {
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.footer-logo img {
+    width: 150px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.footer-brand p {
+    color: #a8adb3;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+
+/* =========================================
+   FOOTER COLUMNS
+========================================= */
+
+.footer-column h3,
+.footer-contact h3 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 25px;
+    text-transform: capitalize;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 14px;
+}
+
+.footer-column ul li a {
+    color: #a8adb3;
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #ffffff;
+    padding-left: 4px;
+}
+
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.footer-contact {
+    max-width: 320px;
+}
+
+.contact-block {
+    margin-bottom: 25px;
+}
+
+.contact-label {
+    display: block;
+    color: #777d84;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.contact-block a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px;
+    margin-bottom: 9px;
+    transition: color 0.3s ease;
+}
+
+.contact-block a:hover {
+    color: #cccccc;
+}
+
+.country-flag {
+    display: inline-block;
+    margin-right: 6px;
+}
+
+
+/* =========================================
+   FOOTER CTA
+========================================= */
+
+.footer-cta {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    padding: 35px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.footer-cta-content h3 {
+    color: #ffffff;
+    font-size: 24px;
+    margin: 0 0 8px;
+}
+
+.footer-cta-content p {
+    color: #9da3aa;
+    font-size: 14px;
+    margin: 0;
+}
+
+.footer-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    background: #ffffff;
+    color: #0b0d0f;
+
+    padding: 14px 24px;
+
+    border-radius: 5px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition: all 0.3s ease;
+}
+
+.footer-cta-btn span {
+    font-size: 18px;
+}
+
+.footer-cta-btn:hover {
+    background: #e9e9e9;
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   FOOTER BOTTOM
+========================================= */
+
+.footer-bottom {
+    min-height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+}
+
+.footer-copyright p {
+    margin: 0;
+    color: #777d84;
+    font-size: 13px;
+}
+
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.footer-social a {
+    color: #a8adb3;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #ffffff;
+}
+
+
+/* =========================================
+   COOKIE BANNER
+========================================= */
+
+.cookie-banner {
+    position: fixed;
+
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+
+    max-width: 760px;
+
+    margin: auto;
+
+    background: #ffffff;
+    color: #111111;
+
+    padding: 18px 22px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.30);
+
+    z-index: 999999;
+
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+
+/* COOKIE HIDDEN */
+
+.cookie-banner.cookie-hidden {
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(30px);
+
+    pointer-events: none;
+}
+
+
+/* COOKIE CONTENT */
+
+.cookie-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+}
+
+.cookie-text {
+    flex: 1;
+}
+
+.cookie-text strong {
+    display: block;
+
+    color: #111111;
+
+    font-size: 16px;
+
+    margin-bottom: 5px;
+}
+
+.cookie-text p {
+    color: #555555;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin: 0;
+}
+
+
+/* COOKIE ACTIONS */
+
+.cookie-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.cookie-policy-link {
+    color: #555555;
+
+    font-size: 13px;
+
+    text-decoration: underline;
+
+    white-space: nowrap;
+}
+
+.cookie-btn {
+    border: none;
+
+    background: #111111;
+    color: #ffffff;
+
+    padding: 10px 22px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition: all 0.3s ease;
+}
+
+.cookie-btn:hover {
+    background: #333333;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 991px) {
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 45px;
+    }
+
+    .footer-brand {
+        max-width: 100%;
+    }
+
+    .footer-contact {
+        max-width: 100%;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+
+    .main-footer {
+        padding-top: 55px;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: 35px;
+
+        padding-bottom: 45px;
+    }
+
+    .footer-brand {
+        max-width: 100%;
+    }
+
+    .footer-column h3,
+    .footer-contact h3 {
+        margin-bottom: 18px;
+    }
+
+    .footer-cta {
+        flex-direction: column;
+        align-items: flex-start;
+
+        padding: 30px 0;
+    }
+
+    .footer-cta-content h3 {
+        font-size: 20px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        justify-content: center;
+
+        padding: 25px 0;
+
+        gap: 15px;
+    }
+
+    .footer-social {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+
+    /* COOKIE MOBILE */
+
+    .cookie-banner {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+
+        padding: 18px;
+    }
+
+    .cookie-content {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+    }
+
+    .cookie-actions {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .cookie-btn {
+        padding: 10px 20px;
+    }
 }
