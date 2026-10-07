@@ -1,15 +1,16 @@
 (function ($) {
     "use strict";
-	
-	var $window = $(window); 
-	var $body = $('body'); 
+
+	var $window = $(window);
+	var $body = $('body');
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 	/* Preloader Effect */
 	$window.on('load', function(){
 		$(".preloader").fadeOut(600);
 	});
 
-	/* Sticky Header */	
+	/* Sticky Header */
 	if($('.active-sticky-header').length){
 		$window.on('resize', function(){
 			setHeaderHeight();
@@ -17,8 +18,8 @@
 
 		function setHeaderHeight(){
 	 		$("header.main-header").css("height", $('header .header-sticky').outerHeight());
-		}	
-	
+		}
+
 		$window.on("scroll", function() {
 			var fromTop = $(window).scrollTop();
 			setHeaderHeight();
@@ -26,8 +27,8 @@
 			$("header .header-sticky").toggleClass("hide", (fromTop > headerHeight + 100));
 			$("header .header-sticky").toggleClass("active", (fromTop > 600));
 		});
-	}	
-	
+	}
+
 	/* Slick Menu JS */
 	$('#menu').slicknav({
 		label : '',
@@ -57,7 +58,7 @@
 		speed: 1000,
 		spaceBetween: 0,
 		loop: true,
-		autoplay: {
+		autoplay: reducedMotion ? false : {
 			delay: 4000,
 		},
 		pagination: {
@@ -73,7 +74,7 @@
 			speed: 2000,
 			spaceBetween: 30,
 			loop: true,
-			autoplay: {
+			autoplay: reducedMotion ? false : {
 				delay: 5000,
 			},
 			breakpoints: {
@@ -94,7 +95,7 @@
 			speed: 1000,
 			spaceBetween: 30,
 			loop: true,
-			autoplay: {
+			autoplay: reducedMotion ? false : {
 				delay: 5000,
 			},
 			pagination: {
@@ -135,7 +136,7 @@
 	}
 
 	/* Init Counter */
-	if ($('.counter').length) {
+	if ($('.counter').length && !reducedMotion) {
 		$('.counter').counterUp({ delay: 6, time: 3000 });
 	}
 
@@ -242,7 +243,7 @@
 	}
 	/* Contact form validation end */
 
-	/* Animated Wow Js */	
+	/* Animated Wow Js */
 	new WOW().init();
 
 	/* Popup Video */
@@ -258,7 +259,7 @@
 
 	/* Our Services List Active Start */
 	if ($('.our-service-list').length) {
-		var element = $('.our-service-list');            
+		var element = $('.our-service-list');
 		var items = element.find('.service-item');
 		if (items.length) {
 			items.on({
@@ -273,8 +274,8 @@
 					//stuff to do on mouse leave
 				}
 			});
-		}                 
+		}
 	}
 	/* Our Services List Active End */
-	
+
 })(jQuery);
