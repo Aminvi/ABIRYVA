@@ -1,15 +1,16 @@
 (function ($) {
     "use strict";
-	
-	var $window = $(window); 
-	var $body = $('body'); 
+
+	var $window = $(window);
+	var $body = $('body');
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 	/* Preloader Effect */
 	$window.on('load', function(){
 		$(".preloader").fadeOut(600);
 	});
 
-	/* Sticky Header */	
+	/* Sticky Header */
 	if($('.active-sticky-header').length){
 		$window.on('resize', function(){
 			setHeaderHeight();
@@ -17,8 +18,8 @@
 
 		function setHeaderHeight(){
 	 		$("header.main-header").css("height", $('header .header-sticky').outerHeight());
-		}	
-	
+		}
+
 		$window.on("scroll", function() {
 			var fromTop = $(window).scrollTop();
 			setHeaderHeight();
@@ -26,8 +27,8 @@
 			$("header .header-sticky").toggleClass("hide", (fromTop > headerHeight + 100));
 			$("header .header-sticky").toggleClass("active", (fromTop > 600));
 		});
-	}	
-	
+	}
+
 	/* Slick Menu JS */
 	$('#menu').slicknav({
 		label : '',
@@ -57,7 +58,7 @@
 		speed: 1000,
 		spaceBetween: 0,
 		loop: true,
-		autoplay: {
+		autoplay: reducedMotion ? false : {
 			delay: 4000,
 		},
 		pagination: {
@@ -73,7 +74,7 @@
 			speed: 2000,
 			spaceBetween: 30,
 			loop: true,
-			autoplay: {
+			autoplay: reducedMotion ? false : {
 				delay: 5000,
 			},
 			breakpoints: {
@@ -94,7 +95,7 @@
 			speed: 1000,
 			spaceBetween: 30,
 			loop: true,
-			autoplay: {
+			autoplay: reducedMotion ? false : {
 				delay: 5000,
 			},
 			pagination: {
@@ -135,7 +136,7 @@
 	}
 
 	/* Init Counter */
-	if ($('.counter').length) {
+	if ($('.counter').length && !reducedMotion) {
 		$('.counter').counterUp({ delay: 6, time: 3000 });
 	}
 
@@ -167,81 +168,7 @@
         });
     }
 
-	/* Text Effect Animation */
-	if ($('.text-anime-style-1').length) {
-		let staggerAmount 	= 0.05,
-			translateXValue = 0,
-			delayValue 		= 0.5,
-		   animatedTextElements = document.querySelectorAll('.text-anime-style-1');
-		
-		animatedTextElements.forEach((element) => {
-			let animationSplitText = new SplitText(element, { type: "chars, words" });
-				gsap.from(animationSplitText.words, {
-				duration: 1,
-				delay: delayValue,
-				x: 20,
-				autoAlpha: 0,
-				stagger: staggerAmount,
-				scrollTrigger: { trigger: element, start: "top 85%" },
-				});
-		});		
-	}
-	
-	if ($('.text-anime-style-2').length) {				
-		let	 staggerAmount 		= 0.03,
-			 translateXValue	= 20,
-			 delayValue 		= 0.1,
-			 easeType 			= "power2.out",
-			 animatedTextElements = document.querySelectorAll('.text-anime-style-2');
-		
-		animatedTextElements.forEach((element) => {
-			let animationSplitText = new SplitText(element, { type: "chars, words" });
-				gsap.from(animationSplitText.chars, {
-					duration: 1,
-					delay: delayValue,
-					x: translateXValue,
-					autoAlpha: 0,
-					stagger: staggerAmount,
-					ease: easeType,
-					scrollTrigger: { trigger: element, start: "top 85%"},
-				});
-		});		
-	}
-	
-	if ($('.text-anime-style-2').length) {		
-		let	animatedTextElements = document.querySelectorAll('.text-anime-style-2');
-		
-		 animatedTextElements.forEach((element) => {
-			//Reset if needed
-			if (element.animation) {
-				element.animation.progress(1).kill();
-				element.split.revert();
-			}
-
-			element.split = new SplitText(element, {
-				type: "lines,words,chars",
-				linesClass: "split-line",
-			});
-			gsap.set(element, { perspective: 400 });
-
-			gsap.set(element.split.chars, {
-				opacity: 0,
-				x: "50",
-			});
-
-			element.animation = gsap.to(element.split.chars, {
-				scrollTrigger: { trigger: element,	start: "top 90%" },
-				x: "0",
-				y: "0",
-				rotateX: "0",
-				opacity: 1,
-				duration: 1,
-				ease: Back.easeOut,
-				stagger: 0.02,
-			});
-		});		
-	}
-
+	/* Headings remain readable without character-splitting animations. */
 	/* Parallaxie js */
 	/* var $parallaxie = $('.parallaxie');
 	if($parallaxie.length && ($window.width() > 991))
@@ -316,7 +243,7 @@
 	}
 	/* Contact form validation end */
 
-	/* Animated Wow Js */	
+	/* Animated Wow Js */
 	new WOW().init();
 
 	/* Popup Video */
@@ -332,7 +259,7 @@
 
 	/* Our Services List Active Start */
 	if ($('.our-service-list').length) {
-		var element = $('.our-service-list');            
+		var element = $('.our-service-list');
 		var items = element.find('.service-item');
 		if (items.length) {
 			items.on({
@@ -347,8 +274,8 @@
 					//stuff to do on mouse leave
 				}
 			});
-		}                 
+		}
 	}
 	/* Our Services List Active End */
-	
+
 })(jQuery);

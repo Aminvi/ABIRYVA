@@ -37,5 +37,47 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/sinngle2.html",
+      "destination": "/Modernising-Enterprise.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog-single.html",
+      "destination": "/ISO-Transition.html",
+      "permanent": true
+    },
+    {
+      "source": "/gov.html",
+      "destination": "/Government-Technology.html",
+      "permanent": true
+    },
+    {
+      "source": "/single3.html",
+      "destination": "/Cyber-Aware-Workforce.html",
+      "permanent": true
+    },
+    {
+      "source": "/single4.html",
+      "destination": "/Strengthening-External-Attack.html",
+      "permanent": true
+    },
+    {
+      "source": "/single5.html",
+      "destination": "/Enterprise-Vulnerability.html",
+      "permanent": true
+    },
+    {
+      "source": "/single7.html",
+      "destination": "/dataai.html",
+      "permanent": true
+    },
+    {
+      "source": "/service-single.html",
+      "destination": "/services.html",
+      "permanent": true
+    }
   ]
 }
