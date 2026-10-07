@@ -1,0 +1,100 @@
+/* Shared site chrome and accessibility repairs. Loaded after legacy page styles. */
+[hidden] { display: none !important; }
+html { scroll-padding-top: 24px; }
+body { overflow-x: clip; }
+img { max-width: 100%; }
+.site-shell { width: min(1200px, calc(100% - 48px)); margin-inline: auto; }
+.site-header { background: #05080d; color: #fff; position: relative; z-index: 20; }
+.site-header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 88px; }
+.site-logo img { object-fit: contain; }
+.site-desktop-nav { display: flex; gap: 22px; align-items: center; }
+.site-header a { color: #fff; font-size: 14px; text-decoration: none; }
+.site-desktop-nav a { padding: 12px 0; }
+.site-desktop-nav a[aria-current], .site-desktop-nav a:hover { color: #b8dcff; text-decoration: underline; text-underline-offset: 6px; }
+.site-button, .site-secondary-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 12px 20px; border: 1px solid #124779; border-radius: 8px; font: inherit; font-size: 14px; font-weight: 650; text-decoration: none; cursor: pointer; line-height: 1.4; }
+.site-button { background: #0c3764; color: #fff !important; }
+.site-button:hover { background: #174e85; }
+.site-secondary-button { background: #fff; color: #0c3764 !important; }
+.site-button:disabled { opacity: .6; cursor: wait; }
+.site-header .site-button { background: #174e85; }
+.site-mobile-menu { display: none; }
+.site-skip-link { position: absolute; left: 12px; top: -100px; padding: 12px 20px; background: #fff; color: #072b50; z-index: 100; }
+.site-skip-link:focus { top: 12px; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #568ce2; outline-offset: 4px; }
+.site-footer { background: #070d17; color: #dce7f4; padding: 64px 0 24px; font-size: 15px; }
+.site-footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 56px; }
+.site-footer h2 { color: #fff; font-size: 20px; margin: 0 0 18px; }
+.site-footer a, .site-footer button { color: #dce7f4; }
+.site-footer-grid a:not(:has(img)) { display: block; margin: 0 0 12px; }
+.site-footer-grid p { margin: 18px 0; max-width: 340px; }
+.site-footer-action { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 32px 0; margin-top: 32px; border-block: 1px solid #334459; }
+.site-footer-action p { margin-bottom: 0; }
+.site-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 18px; padding-top: 24px; }
+.site-footer-bottom p { margin: 0; }
+.site-footer-bottom > div { display: flex; flex-wrap: wrap; gap: 20px; }
+.site-text-button { padding: 0; background: transparent; border: 0; font: inherit; text-decoration: underline; cursor: pointer; }
+.site-section { padding-block: 64px; }
+.site-section h2, .site-booking h2 { font-size: clamp(26px, 3vw, 40px); line-height: 1.2; margin-bottom: 20px; }
+.site-case-next { border-top: 1px solid #dce5ed; }
+.site-case-next a { margin-top: 12px; }
+.site-eyebrow { letter-spacing: .13em; font-size: 12px; font-weight: 700; color: #255783; }
+.site-enquiry-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; }
+#enquiry-form { padding: 28px; border: 1px solid #dce5ed; border-radius: 16px; background: #f6f9fc; color: #142e46; }
+.site-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+#enquiry-form label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 20px; }
+#enquiry-form input:not([type=checkbox]), #enquiry-form select, #enquiry-form textarea { display: block; width: 100%; background: #fff; color: #142e46; border: 1px solid #8b9eae; border-radius: 7px; padding: 12px; margin-top: 8px; font: inherit; }
+#enquiry-form .site-checkbox { font-weight: 400; }
+.site-checkbox input { margin-right: 8px; width: 18px; height: 18px; }
+.site-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+#enquiry-status { margin-top: 20px; margin-bottom: 0; }
+.site-booking { padding: 28px; background: #f6f9fc; border: 1px solid #dce5ed; border-radius: 16px; color: #142e46; }
+.site-booking h2 { color: #142e46; font-size: 28px; }
+.site-booking-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 16px; }
+.site-small { font-size: 13px; line-height: 1.6; }
+.site-booking iframe { border: 0; width: 100%; height: 700px; margin-top: 20px; background: #fff; }
+.site-service-next { padding: 24px; background: #f4f8fc; border-radius: 10px; color: #143b61; margin: 24px; }
+.site-service-next h4 { color: #143b61; }
+.site-health-offer { padding-block: 32px; color: inherit; }
+.site-evidence-note { font-size: 14px; max-width: 780px; margin-bottom: 30px; }
+.site-cookie-notice { position: fixed; z-index: 100; bottom: 18px; left: 50%; transform: translateX(-50%); width: min(900px, calc(100% - 32px)); padding: 20px 24px; border-radius: 14px; background: #fff; color: #19334c; box-shadow: 0 8px 40px #0003; border: 1px solid #dce5ed; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 13px; }
+.site-cookie-notice p { margin: 0; max-width: 470px; }
+.site-cookie-notice > div { display: flex; gap: 8px; flex-shrink: 0; }
+.site-cookie-notice button { padding: 10px 14px; font-size: 12px; }
+.services-hero h1 { color: #fff !important; }
+.services-hero h1 span { color: #b8dcff !important; }
+.hero .section-title h1, .hero-content h1 { color: #fff !important; }
+.hero .section-title p, .hero-content .section-title p { color: #d4e2f1 !important; }
+.hero-content .section-title h3 { color: #d4e2f1 !important; }
+.contact-info-content a { color: #164b7c; overflow-wrap: anywhere; }
+.premium-service-card { scroll-margin-top: 32px; }
+main:focus { outline: none; }
+.page-header h1, .hero-section h1 { overflow-wrap: anywhere; }
+@media (max-width: 1050px) {
+  .site-header-cta { display: none; }
+  .site-desktop-nav { gap: 18px; }
+}
+@media (max-width: 760px) {
+  .site-shell { width: calc(100% - 32px); }
+  .site-header-inner { min-height: 76px; }
+  .site-desktop-nav { display: none; }
+  .site-mobile-menu { display: block; }
+  .site-mobile-menu summary { padding: 12px; min-height: 44px; cursor: pointer; font-weight: 650; }
+  .site-mobile-menu nav { position: absolute; top: 76px; left: 0; right: 0; padding: 16px 24px; background: #071320; box-shadow: 0 8px 20px #0002; }
+  .site-mobile-menu nav a { display: block; padding: 12px 0; }
+  .site-footer-grid, .site-enquiry-grid, .site-form-grid { grid-template-columns: 1fr; gap: 24px; }
+  .site-footer { padding-top: 40px; }
+  .site-footer-action, .site-footer-bottom { align-items: flex-start; flex-direction: column; }
+  .site-section { padding-block: 40px; }
+  .site-cookie-notice { bottom: 12px; padding: 18px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .site-cookie-notice > div { flex-wrap: wrap; }
+  .site-booking, #enquiry-form { padding: 20px; }
+  .contact-form-img { margin-bottom: 24px; }
+  .services-hero { min-height: auto; }
+  .services-hero h1 { font-size: clamp(32px, 9vw, 56px) !important; }
+  .page-header { padding-block: 48px; }
+  .page-header h1 { font-size: clamp(30px, 8vw, 48px) !important; }
+  .services-hero::before, .services-hero::after { max-width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
