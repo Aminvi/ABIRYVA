@@ -24,7 +24,7 @@
     const container = button.closest('.site-booking').querySelector('[data-booking-container]');
     const iframe = document.createElement('iframe');
     iframe.title = 'Book a 30-minute consultation with Abiryva on Calendly';
-    iframe.src = 'https://calendly.com/alahamhedge/30min?embed_domain=' + encodeURIComponent(location.hostname) + '&embed_type=Inline';
+    iframe.src = 'https://calendly.com/abiryva-info/30min?embed_domain=' + encodeURIComponent(location.hostname) + '&embed_type=Inline';
     iframe.loading = 'lazy';
     container.replaceChildren(iframe);
     button.hidden = true;
