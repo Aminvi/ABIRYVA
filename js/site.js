@@ -14,23 +14,68 @@
     saveChoice(button.dataset.consent);
     if (choice === 'essential') {
       document.querySelectorAll('[data-booking-container]').forEach(el => el.replaceChildren());
-      document.querySelectorAll('[data-load-booking]').forEach(el => { el.hidden = false; });
+      document.querySelectorAll('[data-booking-verification]').forEach(el => { el.hidden = false; });
     }
   }));
   document.querySelectorAll('[data-cookie-settings]').forEach(button => button.addEventListener('click', () => {
     if (notice) { notice.hidden = false; notice.querySelector('button').focus(); }
   }));
-  document.querySelectorAll('[data-load-booking]').forEach(button => button.addEventListener('click', () => {
-    const container = button.closest('.site-booking').querySelector('[data-booking-container]');
-    const iframe = document.createElement('iframe');
-    iframe.title = 'Book a 30-minute consultation with Abiryva on Calendly';
-    iframe.src = 'https://calendly.com/abiryva-info/30min?embed_domain=' + encodeURIComponent(location.hostname) + '&embed_type=Inline';
-    iframe.loading = 'lazy';
-    container.replaceChildren(iframe);
-    button.hidden = true;
-    // Explicitly loading the calendar is consent for this visit; no preference is silently persisted.
-    if (notice) notice.hidden = true;
-  }));
+  document.querySelectorAll('[data-booking-verification]').forEach(bookingForm => {
+    let challenge;
+    const status = bookingForm.querySelector('[data-verification-status]');
+    const step = bookingForm.querySelector('[data-code-step]');
+    const send = bookingForm.querySelector('[type=submit]');
+    const reset = () => {
+      challenge = null;
+      step.hidden = true;
+      send.hidden = false;
+      bookingForm.elements.code.required = false;
+      bookingForm.elements.code.value = '';
+    };
+    bookingForm.elements.email.addEventListener('input', reset);
+    bookingForm.querySelector('[data-resend-code]').addEventListener('click', () => { reset(); bookingForm.requestSubmit(); });
+    bookingForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!bookingForm.reportValidity()) return;
+      const buttons = bookingForm.querySelectorAll('button');
+      buttons.forEach(button => { button.disabled = true; });
+      const verifying = Boolean(challenge);
+      status.textContent = verifying ? 'Checking your code…' : 'Sending your code…';
+      try {
+        if (!/^https?:$/.test(location.protocol)) throw new Error('Email verification requires the deployed website. Please email info@abiryva.com for help booking.');
+        const response = await fetch('/api/booking-verification', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: verifying ? 'verify' : 'send', email: bookingForm.elements.email.value, code: bookingForm.elements.code.value, challenge }),
+          signal: AbortSignal.timeout(30000)
+        });
+        if (!(response.headers.get('content-type') || '').includes('application/json')) {
+          throw new Error('The booking verification service is not available on this website yet. Please email info@abiryva.com for help booking.');
+        }
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error(result.error || 'Verification unavailable. Please try again.');
+        if (!verifying) {
+          challenge = result.challenge;
+          step.hidden = false;
+          send.hidden = true;
+          bookingForm.elements.code.required = true;
+          status.textContent = 'Code sent. Check your inbox and spam folder. You can request another code after one minute.';
+          bookingForm.elements.code.focus();
+        } else {
+          const container = bookingForm.closest('.site-booking').querySelector('[data-booking-container]');
+          const frame = document.createElement('iframe');
+          frame.title = 'Book a 30-minute consultation with Abiryva on Calendly';
+          frame.src = result.bookingUrl + '&embed_domain=' + encodeURIComponent(location.hostname) + '&embed_type=Inline';
+          const link = document.createElement('a');
+          link.href = result.bookingUrl; link.target = '_blank'; link.rel = 'noopener noreferrer';
+          link.className = 'site-secondary-button'; link.textContent = 'Open verified booking calendar ↗';
+          container.replaceChildren(link, frame);
+          bookingForm.hidden = true;
+          if (notice) notice.hidden = true;
+        }
+      } catch (error) { status.textContent = error.name === 'TimeoutError' ? 'Request timed out. Please try again shortly.' : error instanceof TypeError ? 'Could not reach the verification service. Please check your connection or email info@abiryva.com for help booking.' : error.message; }
+      finally { buttons.forEach(button => { button.disabled = false; }); }
+    });
+  });
   const openService = () => {
     const id = decodeURIComponent(location.hash.slice(1));
     const target = document.getElementById(id);
