@@ -111,3 +111,5 @@ main:focus { outline: none; }
   .hero-content { padding: 32px 0 16px; }
   .hero-image { max-width: 640px; padding: 16px 0 32px; }
 }
+/* Expanded five-line capability lists */
+.service-card-body{padding:0 26px 26px}.service-card-body ul{padding-left:20px;margin:16px 0 24px}.service-card-body li{margin-bottom:12px;line-height:1.6}.premium-services .site-small{margin-top:28px;max-width:1000px}
