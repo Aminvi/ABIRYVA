@@ -1,6 +1,6 @@
 const { createHmac, randomUUID, timingSafeEqual } = require('node:crypto');
 
-const services = new Set(['general', 'technology-advisory', 'ai-automation', 'cloud-technology', 'cybersecurity', 'digital-transformation', 'digital-government', 'business-resilience', 'managed-advisory', 'security-operations', 'network-security', 'health-check', 'partnership']);
+const services = new Set(['general', 'technology-advisory', 'ai-automation', 'cloud-technology', 'cybersecurity', 'digital-transformation', 'digital-government', 'business-resilience', 'managed-advisory', 'security-operations', 'network-security', 'health-check', 'partnership', 'ai-governance', 'cloud-security', 'resilience']);
 const configured = () => Boolean(process.env.RESEND_API_KEY && process.env.ENQUIRY_FROM_EMAIL);
 const sign = value => createHmac('sha256', process.env.RESEND_API_KEY).update(value).digest('hex');
 function validToken(token) {
