@@ -1,6 +1,6 @@
 # Abiryva website
 
-Static HTML site with a Vercel Node.js enquiry function. No build step is required.
+Static HTML site with Vercel Node.js enquiry, email-verification and client-portal functions. Run npm ci and npm run build; the public/ output contains only website assets.
 
 ## Enquiry delivery
 
