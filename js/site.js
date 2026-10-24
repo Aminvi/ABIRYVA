@@ -77,9 +77,12 @@
     });
   });
   const openService = () => {
-    const id = decodeURIComponent(location.hash.slice(1));
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+    const aliases = {'technology-advisory':'digital-transformation','ai-automation':'ai-governance','cloud-technology':'cloud-security','digital-government':'digital-transformation','business-resilience':'resilience','managed-advisory':'cybersecurity','security-operations':'resilience','network-security':'cloud-security'};
+    id = aliases[id] || id;
     const target = document.getElementById(id);
-    if (target?.matches('details.premium-service-card')) target.open = true;
+    if (target?.matches('details.premium-service-card')) { target.open = true; target.scrollIntoView({block:'start'}); }
   };
   openService();
   window.addEventListener('hashchange', openService);
