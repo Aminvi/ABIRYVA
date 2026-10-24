@@ -2,8 +2,9 @@ const { test, beforeEach } = require('node:test');
 const assert = require('node:assert/strict');
 const { createHmac, randomUUID } = require('node:crypto');
 const handler = require('../api/enquiry');
+const store = require('../lib/store');
 const realFetch = global.fetch;
-beforeEach(() => { delete process.env.RESEND_API_KEY; delete process.env.ENQUIRY_FROM_EMAIL; delete process.env.ENQUIRY_TO_EMAIL; global.fetch = realFetch; });
+beforeEach(() => { store.limit = async () => true; process.env.UPSTASH_REDIS_REST_URL='https://redis.example'; process.env.UPSTASH_REDIS_REST_TOKEN='test'; delete process.env.RESEND_API_KEY; delete process.env.ENQUIRY_FROM_EMAIL; delete process.env.ENQUIRY_TO_EMAIL; global.fetch = realFetch; });
 const response = () => ({ code: 200, headers: {}, setHeader(k,v) { this.headers[k]=v; }, status(n) { this.code=n; return this; }, json(body) { this.body=body; return this; } });
 const configured = () => { process.env.RESEND_API_KEY='test-key'; process.env.ENQUIRY_FROM_EMAIL='Abiryva <website@abiryva.com>'; };
 const token = () => { const v=(Date.now()-5000)+'.'+randomUUID(); return v+'.'+createHmac('sha256','test-key').update(v).digest('hex'); };
@@ -15,3 +16,7 @@ test('rejects cross-site submissions and unsupported methods',async()=>{configur
 test('sends all fields only to configured owner with stable retry idempotency',async()=>{configured(); const calls=[]; global.fetch=async (url,options)=>{calls.push({url,options});return {ok:true}}; const q=request({phone:'+441234567890'}); for(let i=0;i<2;i++){const r=response(); await handler(q,r); assert.deepEqual(r.body,{ok:true});} const payload=JSON.parse(calls[0].options.body); assert.deepEqual(payload.to,['info@abiryva.com']); assert.equal(payload.reply_to,'test@example.com'); assert.ok(payload.text.includes('Test Company')); assert.ok(payload.text.includes('+441234567890')); assert.equal(calls[0].options.headers['Idempotency-Key'],calls[1].options.headers['Idempotency-Key']); });
 test('provider failure never reports success',async()=>{configured(); global.fetch=async()=>({ok:false,status:500}); const r=response(); await handler(request(),r); assert.equal(r.code,502); assert.equal(r.body.ok,undefined);});
 test('oversized and malformed bodies are rejected',async()=>{configured(); const r=response(); const q=request(); q.body='not json'; await handler(q,r); assert.equal(r.code,400); const x=response(); await handler(request({message:'x'.repeat(17000)}),x); assert.equal(x.code,413);});
+
+test('shared rate limit blocks delivery and exposes no credentials',async()=>{configured();store.limit=async()=>false;global.fetch=()=>{throw Error('must not send')};const r=response();await handler(request(),r);assert.equal(r.code,429);assert.equal(r.headers['Retry-After'],'3600');assert.ok(!JSON.stringify(r.body).includes('test-key'));});
+test('missing shared storage disables delivery',async()=>{configured();delete process.env.UPSTASH_REDIS_REST_TOKEN;const r=response();await handler({method:'GET'},r);assert.equal(r.body.available,false);});
+test('HTML-like message is delivered only as plain text',async()=>{configured();let payload;global.fetch=async(u,o)=>{payload=JSON.parse(o.body);return {ok:true}};const r=response();await handler(request({message:'<script>alert("example")</script> testing plain text'}),r);assert.equal(r.code,200);assert.equal(payload.html,undefined);assert.ok(payload.text.includes('<script>'));});

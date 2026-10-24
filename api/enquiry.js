@@ -1,7 +1,8 @@
+const store = require('../lib/store');
 const { createHmac, randomUUID, timingSafeEqual } = require('node:crypto');
 
-const services = new Set(['general', 'technology-advisory', 'ai-automation', 'cloud-technology', 'cybersecurity', 'digital-transformation', 'digital-government', 'business-resilience', 'managed-advisory', 'security-operations', 'network-security', 'health-check', 'partnership']);
-const configured = () => Boolean(process.env.RESEND_API_KEY && process.env.ENQUIRY_FROM_EMAIL);
+const services = new Set(['general', 'technology-advisory', 'ai-automation', 'cloud-technology', 'cybersecurity', 'digital-transformation', 'digital-government', 'business-resilience', 'managed-advisory', 'security-operations', 'network-security', 'health-check', 'partnership', 'ai-governance', 'cloud-security', 'resilience']);
+const configured = () => Boolean(process.env.RESEND_API_KEY && process.env.ENQUIRY_FROM_EMAIL && store.ready());
 const sign = value => createHmac('sha256', process.env.RESEND_API_KEY).update(value).digest('hex');
 function validToken(token) {
   if (typeof token !== 'string' || token.length > 200) return false;
@@ -41,6 +42,11 @@ module.exports = async function handler(req, res) {
   const name = clean('name'), email = clean('email'), organisation = clean('organisation'), phone = clean('phone'), service = clean('service'), message = clean('message');
   if (!name || name.length > 120 || !organisation || organisation.length > 160 || phone.length > 40 || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || /[\r\n]/.test(email) || !services.has(service) || message.length < 20 || message.length > 5000 || body.consent !== true) return res.status(400).json({ error: 'Please check your details, message and privacy consent.' });
   try {
+    const ip = req.headers['x-vercel-forwarded-for'] || req.socket?.remoteAddress || 'unknown';
+    if (!await store.limit('enquiry:ip:' + store.digest(String(ip)), 10, 3600) || !await store.limit('enquiry:email:' + store.digest(email.toLowerCase()), 5, 3600)) {
+      res.setHeader('Retry-After', '3600');
+      return res.status(429).json({ error: 'Too many enquiries. Please try again later or email info@abiryva.com.' });
+    }
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json', 'Idempotency-Key': 'abiryva-' + body.token.split('.')[1] },

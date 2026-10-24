@@ -33,7 +33,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://assets.calendly.com; connect-src 'self' https://calendly.com https://*.calendly.com; frame-src 'self' https://calendly.com https://*.calendly.com; upgrade-insecure-requests;"
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' https://challenges.cloudflare.com https://*.protect.clerk.com https://*.clerk.accounts.dev https://clerk.abiryva.com 'sha256-1AK1UU4nKkdiPJfCZMt7E6b0Vjd8GkiBsohvnTLjQeo=' 'sha256-2zgQEHvSNWGIiOVoGcvIdvMTn6NJAtDKyKQEY82BkKA=' 'sha256-32FykL1vg9C5o+Wjxn9E/LbsMlt5RIv8d2Q8v7IYfn0=' 'sha256-A7UHTVFCYI9hn5/7rmiiHd9/DevOYxa+Y4Ak/bpJHJc=' 'sha256-DcInP3mCMjgkzpNSC6sfD76UOFuwq8/qFLB/xMdh6bg=' 'sha256-F1KSGH3Pqec4GGzKkgGOlZi9zyvLClgAcDtzPjaKGNo=' 'sha256-HZf8lcAabpV5OJNyGKeQcsqWcJ2/pdf/iVdukxqoTAM=' 'sha256-O6MHTaFecG8viGXeMgtlsI82PLaAngbxr4v7HVeYt3s=' 'sha256-PGNqZcQ3Rj6vRU6jzA8V0iGpEjzKHQwraAui3NxOW20=' 'sha256-PTgSCxd1qmB88ylaA4Fi/jNL4o9hfY1s5biyt1Pqq2Y=' 'sha256-Q53yAzDQxPBAtlrODvAfYV60egjLhsB5+BCTX6vjOJE=' 'sha256-SUxiEI3J49YOh10oWRjfO2q62TxrEjSB9o1CeabQ03I=' 'sha256-UfY8Vd/z7kq7IgrE72bZRlyTH3MpUtEMxInf39T/ruw=' 'sha256-VQMg0iAMwVbM/JoZ/lrjoOSsDJFhBWoEn25YOs/bYoU=' 'sha256-WCrcwMycqZXqPvae6M5mw+M7GV4AZ9zuGNjR7PAKsLc=' 'sha256-X8+K1/56CzPenXDakY6aDYj6ufLI2CWIfxhzpYZ9Sss=' 'sha256-gIPe8CHoJNQYyd8KgaEbWyh2Qx81YHDc187Zc8eVOM0=' 'sha256-ge/XEQsTjs10SSt5hcrAFdXe7Ncr7fv3uOeR3+QThhs=' 'sha256-upeldSpTSOWJWRihWso7gU6/ecjb9lnfqOk0IF6gK4I=' 'sha256-yYNu5BDCbcyr9tdxaxq8TCyoD5/uMI5tr3xScB13LT4='; connect-src 'self' https://*.protect.clerk.com:* https://*.clerk.accounts.dev https://clerk.abiryva.com https://calendly.com https://*.calendly.com; frame-src 'self' https://*.protect.clerk.com https://*.clerk.accounts.dev https://clerk.abiryva.com https://challenges.cloudflare.com https://calendly.com https://*.calendly.com; upgrade-insecure-requests; worker-src 'self' blob:;"
         }
       ]
     }
@@ -79,5 +79,21 @@
       "destination": "/services.html",
       "permanent": true
     }
-  ]
+  ],
+  "rewrites": [
+    {
+      "source": "/lib/:path*",
+      "destination": "/404.html"
+    },
+    {
+      "source": "/scripts/:path*",
+      "destination": "/404.html"
+    },
+    {
+      "source": "/portal-src.js",
+      "destination": "/404.html"
+    }
+  ],
+  "outputDirectory": "public",
+  "buildCommand": "npm run build"
 }

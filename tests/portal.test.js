@@ -1,0 +1,20 @@
+const {test,beforeEach}=require('node:test');
+const assert=require('node:assert/strict');
+const store=require('../lib/store');
+const clerk=require('@clerk/backend');
+// Replace the verifier at the module boundary; production still uses Clerk's verifier.
+const clerkPath=require.resolve('@clerk/backend');
+const realExports=require.cache[clerkPath].exports;
+let authenticated=true, commands=[];
+require.cache[clerkPath].exports={...realExports,verifyToken:async(token,options)=>{assert.ok(options.authorizedParties.includes('https://www.abiryva.com'));if(!authenticated)throw Error('invalid');return {sub:'user_clientA',sid:'sess_test'};}};
+const handler=require('../api/portal');
+const res=()=>({headers:{},code:200,setHeader(k,v){this.headers[k]=v},status(n){this.code=n;return this},json(v){this.body=v;return this},end(v){this.body=v;return this}});
+const req=(url='/api/portal',method='GET',body)=>({url,method,headers:{authorization:'Bearer test-session',origin:'https://www.abiryva.com','content-type':'application/json'},body});
+beforeEach(()=>{authenticated=true;commands=[];process.env.CLERK_SECRET_KEY='secret';process.env.CLERK_PUBLISHABLE_KEY='public';store.ready=()=>true;store.limit=async()=>true;store.command=async(...args)=>{commands.push(args);if(args[0]==='GET'&&args[1]==='portal:member:user_clientA')return JSON.stringify({active:true,clientId:'client-a'});if(args[0]==='GET'&&args[1]==='portal:workspace:client-a')return JSON.stringify({name:'Client A',projects:[],documents:[]});if(args[0]==='LRANGE')return [];return null;};});
+test('unauthenticated and invalid sessions cannot access data',async()=>{let r=res(),q=req();delete q.headers.authorization;await handler(q,r);assert.equal(r.code,401);assert.equal(commands.length,0);authenticated=false;r=res();await handler(req(),r);assert.equal(r.code,401);assert.equal(commands.length,0);});
+test('membership must be provisioned and active',async()=>{store.command=async()=>null;const r=res();await handler(req(),r);assert.equal(r.code,403);});
+test('client-supplied tenant cannot select another workspace',async()=>{const r=res();await handler(req('/api/portal?clientId=client-b'),r);assert.equal(r.code,200);assert.equal(r.body.workspace.name,'Client A');assert.ok(!commands.some(c=>String(c[1]).includes('client-b')));});
+test('document lookup is always scoped to assigned client',async()=>{const r=res();await handler(req('/api/portal?action=document&id=client-b-document&clientId=client-b'),r);assert.equal(r.code,404);assert.ok(commands.some(c=>c[1]==='portal:document:client-a:client-b-document'));assert.equal(r.headers['Cache-Control'],'no-store');});
+test('support messages are scoped and have fixed 90-day retention',async()=>{const r=res();await handler(req('/api/portal','POST',{subject:'Project query',message:'Can you confirm the next milestone?',clientId:'client-b'}),r);assert.equal(r.code,201);const saved=commands.find(c=>c[0]==='SET');assert.ok(saved[1].startsWith('portal:ticket:client-a:'));assert.equal(saved[3],'EX');assert.equal(saved[4],90*86400);assert.equal(r.body.ticket.status,'Open');});
+test('cross-origin writes and invalid messages are rejected',async()=>{const q=req('/api/portal','POST',{});q.headers.origin='https://attacker.example';const r=res();await handler(q,r);assert.equal(r.code,403);const x=res();await handler(req('/api/portal','POST',{subject:'x',message:'short'}),x);assert.equal(x.code,400);});
+test('request limit prevents writes',async()=>{store.limit=async()=>false;const r=res();await handler(req('/api/portal','POST',{subject:'Valid subject',message:'A valid support message.'}),r);assert.equal(r.code,429);assert.ok(!commands.some(c=>c[0]==='SET'));});

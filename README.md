@@ -1,6 +1,6 @@
 # Abiryva website
 
-Static HTML site with a Vercel Node.js enquiry function. No build step is required.
+Static HTML site with Vercel Node.js enquiry, email-verification and client-portal functions. Run npm ci and npm run build; the public/ output contains only website assets.
 
 ## Enquiry delivery
 
@@ -32,3 +32,7 @@ Verify real code delivery, wrong and expired codes, resend, and a completed Cale
 ## If the browser shows HTML instead of JSON
 
 The POST /api/booking-verification endpoint must run as a server function. Uploading only HTML/CSS/JS, opening contact.html from disk, or serving this project on static-only hosting cannot send verification emails. On Vercel, import the complete ABIRYVA-main-2 directory as the project root, use the Other framework preset, leave Build Command unset, and keep Output Directory at the project root (do not select a static-only subdirectory). Ensure api/booking-verification.js is deployed as a function. Configure the four verification environment variables above and redeploy. A POST from the live website must return JSON, including JSON errors for missing configuration; an HTML response usually indicates a missing function, a hosting rewrite, or a hosting error page. For other hosts, deploy an equivalent Node server endpoint and route /api/booking-verification to it.
+
+## Five service lines and client portal
+
+The public services now use five main headings with detailed capabilities beneath each. Previous service anchors continue to resolve. The combined-years claim has been removed. See PORTAL-SETUP.md for client portal configuration and BACKEND-REVIEW.md for source findings and remaining hosting checks. Enquiry delivery now also requires the configured shared Redis store; it is disabled when delivery or storage configuration is missing.
