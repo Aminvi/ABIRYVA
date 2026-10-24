@@ -5,3 +5,4 @@ node_modules/
 .vercel/
 
 js/portal-bundle.js
+public/

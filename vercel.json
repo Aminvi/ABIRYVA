@@ -93,5 +93,7 @@
       "source": "/portal-src.js",
       "destination": "/404.html"
     }
-  ]
+  ],
+  "outputDirectory": "public",
+  "buildCommand": "npm run build"
 }
