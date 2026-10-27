@@ -78,6 +78,11 @@
       "source": "/service-single.html",
       "destination": "/services.html",
       "permanent": true
+    },
+    {
+      "source": "/partner.html",
+      "destination": "/about.html",
+      "permanent": true
     }
   ]
 }

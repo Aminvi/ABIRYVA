@@ -113,3 +113,5 @@ main:focus { outline: none; }
 }
 
 .service-card-body{padding:0 26px 26px}.service-card-body ul{padding-left:20px;margin:16px 0 24px}.service-card-body li{margin-bottom:12px;line-height:1.6}.premium-services .site-small{margin-top:28px;max-width:1000px}
+
+.technology-expertise-label{font-size:12px;letter-spacing:.17em;font-weight:700;color:#344b68;margin:0 0 18px}.company-booklet{display:grid;grid-template-columns:minmax(210px,.7fr) 1.3fr;align-items:center;gap:56px}.company-booklet-cover{min-height:300px;padding:30px;background:linear-gradient(145deg,#082343,#163b67);border-radius:8px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 15px 35px #08234325}.company-booklet-cover span{letter-spacing:.25em;font-weight:700}.company-booklet-cover strong{font-size:42px;line-height:1.1}.company-booklet-cover small{color:#c6d7e5}.company-booklet .site-small{margin-top:14px}.site-registration{border-top:1px solid #ffffff24;margin-top:24px;padding-top:20px;color:#cbd5e1;font-size:13px}@media(max-width:700px){.company-booklet{grid-template-columns:1fr;gap:28px}.company-booklet-cover{max-width:340px;width:100%}}

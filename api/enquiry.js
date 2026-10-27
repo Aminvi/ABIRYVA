@@ -1,6 +1,6 @@
 const { createHmac, randomUUID, timingSafeEqual } = require('node:crypto');
 
-const services = new Set(['general', 'technology-advisory', 'ai-automation', 'cloud-technology', 'cybersecurity', 'digital-transformation', 'digital-government', 'business-resilience', 'managed-advisory', 'security-operations', 'network-security', 'health-check', 'partnership', 'ai-governance', 'cloud-security', 'resilience']);
+const services = new Set(['general', 'technology-advisory', 'ai-automation', 'cloud-technology', 'cybersecurity', 'digital-transformation', 'digital-government', 'business-resilience', 'managed-advisory', 'security-operations', 'network-security', 'health-check', 'ai-governance', 'cloud-security', 'resilience']);
 const configured = () => Boolean(process.env.RESEND_API_KEY && process.env.ENQUIRY_FROM_EMAIL);
 const sign = value => createHmac('sha256', process.env.RESEND_API_KEY).update(value).digest('hex');
 function validToken(token) {
@@ -28,7 +28,7 @@ module.exports = async function handler(req, res) {
   }
   if (req.method !== 'POST') { res.setHeader('Allow', 'GET, POST'); return res.status(405).json({ error: 'Method not allowed.' }); }
   if (!allowedOrigin(req.headers.origin)) return res.status(403).json({ error: 'Please send your enquiry from the Abiryva website.' });
-  if (!configured()) return res.status(503).json({ error: 'Please book a consultation or email info@abiryva.com.' });
+  if (!configured()) return res.status(503).json({ error: 'Please book a discovery call or email info@abiryva.com.' });
   if (!String(req.headers['content-type'] || '').startsWith('application/json')) return res.status(415).json({ error: 'Unsupported request format.' });
   if (Number(req.headers['content-length'] || 0) > 16000) return res.status(413).json({ error: 'Your enquiry is too long.' });
   let body;
