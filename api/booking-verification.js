@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
       await redis('SET', 'booking:code:' + id, JSON.stringify({ email, digest: hash(id + ':' + email + ':' + code), attempts: 0 }), 'EX', 600);
       const sent = await fetch('https://api.resend.com/emails', {
         method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ from: process.env.ENQUIRY_FROM_EMAIL, to: [email], subject: 'Your Abiryva booking verification code', text: `Your verification code is ${code}. It expires in 10 minutes. Enter it on the Abiryva website to open the booking calendar. If you did not request this code, ignore this email.` }), signal: AbortSignal.timeout(12000)
+        body: JSON.stringify({ from: process.env.ENQUIRY_FROM_EMAIL, to: [email], subject: 'Your Abiryva booking verification code', text: `Your verification code is ${code}. It expires in 10 minutes. Enter it on the Abiryva website to open the discovery call calendar. If you did not request this code, ignore this email.` }), signal: AbortSignal.timeout(12000)
       });
       if (!sent.ok) { await redis('DEL', 'booking:code:' + id, 'booking:cooldown:' + hash(email)); throw new Error('Delivery failed'); }
       return res.status(200).json({ ok: true, challenge: id });

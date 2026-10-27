@@ -63,7 +63,7 @@
         } else {
           const container = bookingForm.closest('.site-booking').querySelector('[data-booking-container]');
           const frame = document.createElement('iframe');
-          frame.title = 'Book a 30-minute consultation with Abiryva on Calendly';
+          frame.title = 'Book a 30-minute discovery call with Abiryva on Calendly';
           frame.src = result.bookingUrl + '&embed_domain=' + encodeURIComponent(location.hostname) + '&embed_type=Inline';
           const link = document.createElement('a');
           link.href = result.bookingUrl; link.target = '_blank'; link.rel = 'noopener noreferrer';
