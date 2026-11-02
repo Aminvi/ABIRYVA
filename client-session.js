@@ -21,7 +21,7 @@ export async function start(onSignedIn) {
   document.querySelector('[data-portal-login]').hidden=true;
   const account=document.querySelector('[data-account-settings]');account.hidden=false;account.addEventListener('click',()=>clerk.openUserProfile());
   const out=document.querySelector('[data-sign-out]');out.hidden=false;out.addEventListener('click',()=>clerk.signOut({redirectUrl:location.pathname}));
-  clerk.addListener(({session})=>{if(!session){document.querySelectorAll('[data-private]').forEach(n=>{n.hidden=true;n.replaceChildren();});location.reload();}});
+  clerk.addListener(({session})=>{if(!session){document.querySelectorAll('[data-private]').forEach(n=>{n.hidden=true;n.replaceChildren();});status.textContent='Your session ended. Refresh this page to sign in again.';}});
   await onSignedIn();
  }catch(error){status.textContent=error.message;}
 }
