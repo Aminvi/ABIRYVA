@@ -119,3 +119,4 @@ main:focus { outline: none; }
 /* Keep the discovery action separate from the technology logo section. */
 .hero-content > .section-title{margin-bottom:20px}.hero-content-body{margin-bottom:28px}.hero .technology-expertise-label{color:#c8d7e9;line-height:1.4}
 .site-privacy-preferences{display:grid;gap:.6rem;margin-block:.8rem}.site-privacy-preferences label{display:flex;align-items:flex-start;gap:.5rem}.site-privacy-preferences input{margin-top:.25rem;flex-shrink:0}
+.site-cookie-notice{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}.site-cookie-notice>.site-privacy-preferences{display:flex;flex-direction:column;min-width:0;flex-shrink:1}.site-cookie-notice>div:last-child{grid-column:1/-1;flex-wrap:wrap;justify-content:flex-end}@media(max-width:640px){.site-cookie-notice{grid-template-columns:minmax(0,1fr);gap:12px}.site-cookie-notice>div:last-child{justify-content:flex-start}}
