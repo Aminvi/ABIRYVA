@@ -3,7 +3,7 @@ export async function loadTraffic(){
  const notice=document.querySelector('[data-traffic-status]'),results=document.querySelector('[data-traffic-results]'),button=document.querySelector('[data-traffic-refresh]');button.disabled=true;notice.textContent='Loading traffic…';
  try{
   const data=await api('/api/traffic?days='+document.querySelector('[data-traffic-period]').value);results.replaceChildren();
-  const metrics=node('div','','portal-grid');for(const [label,value]of [['Page views',data.views],['Discovery-call link clicks',data.discoveryClicks],['Enquiries sent',data.enquiries]]){const card=node('article','','portal-card');card.append(node('h3',label),node('p',String(value)));metrics.append(card);}results.append(metrics);
+  const metrics=node('div','','portal-grid portal-traffic-metrics');for(const [label,value]of [['Page views',data.views],['Discovery-call link clicks',data.discoveryClicks],['Enquiries sent',data.enquiries]]){const card=node('article','','portal-card');card.append(node('h3',label),node('p',String(value)));metrics.append(card);}results.append(metrics);
   if(!data.views)results.append(node('p','No recorded page views in this period. Collection begins after publication and requires visitor consent.'));
   const grid=node('div','','portal-grid');
   for(const [title,key]of [['Most viewed pages','pages'],['Traffic sources','sources'],['Countries','countries'],['Devices','devices']]){
