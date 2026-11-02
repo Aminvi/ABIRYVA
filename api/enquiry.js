@@ -56,6 +56,7 @@ module.exports = async function handler(req, res) {
       signal: AbortSignal.timeout(12000)
     });
     if (!response.ok) { console.error('Enquiry provider rejected request', response.status); return res.status(502).json({ error: 'Your enquiry could not be sent. Please retry or email info@abiryva.com.' }); }
+    if(body.analyticsConsent===true&&req.headers.dnt!=='1'&&req.headers['sec-gpc']!=='1'){try{await require('../lib/traffic').record(req,'/contact.html','enquiry_sent');}catch{/* Optional statistics never interrupt delivery. */}}
     return res.status(200).json({ ok: true });
   } catch (_) { console.error('Enquiry provider unavailable'); return res.status(502).json({ error: 'Your enquiry could not be sent. Please retry or email info@abiryva.com.' }); }
 };

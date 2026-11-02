@@ -27,3 +27,9 @@ Run `npm ci`, `npm test`, `npm run security:headers` and `npm run build`. Only a
 Test a staff user and two separate clients: project changes, protected downloads, support replies, cross-workspace denial, revoked membership and revoked sessions. Use disposable development accounts and data. Verify production DNS, provider settings, environment variables and live responses before treating deployment as ready.
 
 CSP follows [Clerk's guidance](https://clerk.com/docs/guides/secure/best-practices/csp-headers): explicit script hosts and JSON-LD hashes, with inline styles retained for the site and sign-in UI.
+
+## Website traffic
+
+The staff dashboard has a 7/30/90-day traffic report. A first-party collector accepts only known public paths, explicit analytics consent and bounded page-view/discovery-click events. Successful enquiries are counted by the server only when analytics permission was supplied. The collector skips requests with browser DNT/GPC privacy signals or obvious bot user agents, limits events per IP through short-lived keyed counters, and caps recorded events at 20,000 per UTC day. Counts are indicative, not unique visitor totals or evidence of completed Calendly bookings. All report reads require the existing staff role and session-age checks.
+
+Statistics use daily aggregate JSON records under `traffic:day:YYYY-MM-DD`, within the existing environment namespace. Their expiry is fixed to midnight 90 days after the UTC collection date; later writes cannot extend retention. No contact information, full referrer URL, persistent analytics visitor identifier or raw IP is stored in the aggregate. Visitor consent is separate from booking consent. No historical data is imported; only consenting traffic after deployment is represented. Existing restricted Redis credentials support the commands used; no new provider or paid plan is required. Normal hosting/database quotas still apply. The date window includes today (UTC).
