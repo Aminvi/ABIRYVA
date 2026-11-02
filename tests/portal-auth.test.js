@@ -1,0 +1,10 @@
+const {test,beforeEach}=require('node:test');const assert=require('node:assert/strict');
+const clerk=require('@clerk/backend');const modulePath=require.resolve('@clerk/backend');const original=require.cache[modulePath].exports;
+let claims,session;
+require.cache[modulePath].exports={...original,verifyToken:async(token,options)=>{assert.ok(options.authorizedParties.includes('https://www.abiryva.com'));return claims;},createClerkClient:()=>({sessions:{getSession:async()=>session}})};
+const auth=require('../lib/portal-auth');const req={headers:{authorization:'Bearer token'}};
+beforeEach(()=>{process.env.CLERK_SECRET_KEY='test';process.env.PORTAL_ADMIN_USER_IDS='user_staff';process.env.NODE_ENV='production';process.env.PORTAL_REQUIRE_STAFF_MFA='true';claims={sub:'user_staff',sid:'session_id',fva:[0,0]};session={status:'active',userId:'user_staff',createdAt:Date.now()};});
+test('revoked sessions are rejected even when their JWT is not expired',async()=>{session.status='revoked';await assert.rejects(auth.authenticate(req),{status:401});});
+test('session and token must belong to the same user',async()=>{session.userId='user_other';await assert.rejects(auth.authenticate(req),{status:401});});
+test('staff role comes from server configuration and requires MFA',async()=>{let a=await auth.authenticate(req);assert.doesNotThrow(()=>auth.requireAdmin(a));claims.fva=[0,-1];a=await auth.authenticate(req);assert.throws(()=>auth.requireAdmin(a),{status:403});});
+test('client cannot self-assert a staff role in JWT claims',async()=>{claims.sub='user_client';claims.admin=true;claims.role='admin';session.userId='user_client';const a=await auth.authenticate(req);assert.equal(a.admin,false);assert.throws(()=>auth.requireAdmin(a),{status:403});});
