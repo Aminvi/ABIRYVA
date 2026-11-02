@@ -12,20 +12,16 @@ function validToken(token) {
   if (!Number.isFinite(age) || age < 2000 || age > 60 * 60 * 1000) return false;
   return timingSafeEqual(Buffer.from(parts[2]), Buffer.from(sign(parts[0] + '.' + parts[1])));
 }
-function allowedOrigin(origin) {
-  const origins = new Set(['https://www.abiryva.com', 'https://abiryva.com', 'https://abiryva.vercel.app']);
-  if (process.env.VERCEL_URL) origins.add('https://' + process.env.VERCEL_URL);
-  if (process.env.VERCEL_BRANCH_URL) origins.add('https://' + process.env.VERCEL_BRANCH_URL);
-  if (process.env.NODE_ENV === 'development') origins.add('http://localhost:3000');
-  return origins.has(origin);
-}
+const allowedOrigin = store.originAllowed;
+const requestIp = req => (process.env.VERCEL === '1' ? req.headers['x-vercel-forwarded-for'] : null) || req.socket?.remoteAddress || 'unknown';
+
 module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Content-Type', 'application/json');
   if (req.method === 'GET') {
     if (!configured()) return res.status(200).json({ available: false });
     try {
-      const ip = (req.headers || {})['x-vercel-forwarded-for'] || req.socket?.remoteAddress || 'unknown';
+      const ip = requestIp(req);
       if (!await store.limit('enquiry:tokens:' + store.digest(String(ip)), 30, 60)) { res.setHeader('Retry-After', '60'); return res.status(429).json({ error: 'Please wait a minute before trying again.' }); }
     } catch { return res.status(503).json({ available: false }); }
     const value = Date.now() + '.' + randomUUID();
@@ -48,7 +44,7 @@ module.exports = async function handler(req, res) {
   const name = clean('name'), email = clean('email'), organisation = clean('organisation'), phone = clean('phone'), service = clean('service'), message = clean('message');
   if (!name || name.length > 120 || !organisation || organisation.length > 160 || phone.length > 40 || /[\r\n]/.test(name + organisation + phone) || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || /[\r\n]/.test(email) || !services.has(service) || message.length < 20 || message.length > 5000 || body.consent !== true) return res.status(400).json({ error: 'Please check your details, message and privacy consent.' });
   try {
-    const ip = req.headers['x-vercel-forwarded-for'] || req.socket?.remoteAddress || 'unknown';
+    const ip = requestIp(req);
     if (!await store.limit('enquiry:ip:' + store.digest(String(ip)), 10, 3600) || !await store.limit('enquiry:email:' + store.digest(email.toLowerCase()), 5, 3600)) {
       res.setHeader('Retry-After', '3600');
       return res.status(429).json({ error: 'Too many enquiries. Please try again later or email info@abiryva.com.' });

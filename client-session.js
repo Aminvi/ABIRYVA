@@ -5,7 +5,7 @@ export async function api(path='/api/portal',options={}) {
  const token=await clerk?.session?.getToken();if(!token)throw new Error('Please sign in again.');
  const response=await fetch(path,{...options,headers:{Authorization:'Bearer '+token,...options.headers},cache:'no-store'});
  if(!(response.headers.get('content-type')||'').includes('application/json'))throw new Error('This service is unavailable. Please contact Abiryva.');
- const data=await response.json();if(!response.ok)throw new Error(data.error||'Request failed.');return data;
+ const data=await response.json();if(!response.ok){if(response.status===401||response.status===403)document.querySelectorAll('[data-private]').forEach(n=>{n.hidden=true;});throw new Error(data.error||'Request failed.');}return data;
 }
 export async function start(onSignedIn) {
  const status=document.querySelector('[data-portal-status]');

@@ -48,5 +48,6 @@ document.querySelector('[data-ticket-form]').addEventListener('submit', async ev
 start(async () => {
  const session=await api('/api/portal?action=session');
  document.querySelector('[data-admin-link]').hidden=!session.admin;
+ if(session.admin){location.replace('/admin.html');return;}
  await loadWorkspace();
 });
