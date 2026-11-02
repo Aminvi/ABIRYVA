@@ -1,3 +1,4 @@
+import {loadTraffic,bindTraffic} from './traffic-admin.js';
 import { api, start, node } from './client-session.js';
 const status=document.querySelector('[data-portal-status]');
 const panel=document.querySelector('[data-admin]');
@@ -53,4 +54,5 @@ bind('[data-document-form]',async form=>{
  const base64=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.onerror=()=>reject(new Error('File could not be read.'));reader.readAsDataURL(file);});
  await save({action:'upload-document',filename:file.name,name:form.elements.name.value,base64});form.reset();await load();
 });
-start(async()=>{await list();panel.hidden=false;status.textContent='';});
+bindTraffic();
+start(async()=>{await list();panel.hidden=false;status.textContent='';await loadTraffic();});

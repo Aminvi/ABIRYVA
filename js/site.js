@@ -112,6 +112,7 @@
     try {
       const data = Object.fromEntries(new FormData(form));
       data.consent = form.elements.consent.checked;
+      try { data.analyticsConsent = localStorage.getItem('abiryvaAnalyticsChoiceV1') === 'allow' && navigator.globalPrivacyControl !== true && navigator.doNotTrack !== '1'; } catch (_) { data.analyticsConsent = false; }
       data.token = token;
       const response = await fetch('/api/enquiry', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data), signal: AbortSignal.timeout(20000) });
       const result = await response.json();
