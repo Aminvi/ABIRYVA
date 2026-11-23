@@ -120,3 +120,20 @@ main:focus { outline: none; }
 .hero-content > .section-title{margin-bottom:20px}.hero-content-body{margin-bottom:28px}.hero .technology-expertise-label{color:#c8d7e9;line-height:1.4}
 .site-privacy-preferences{display:grid;gap:.6rem;margin-block:.8rem}.site-privacy-preferences label{display:flex;align-items:flex-start;gap:.5rem}.site-privacy-preferences input{margin-top:.25rem;flex-shrink:0}
 .site-cookie-notice{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}.site-cookie-notice>.site-privacy-preferences{display:flex;flex-direction:column;min-width:0;flex-shrink:1}.site-cookie-notice>div:last-child{grid-column:1/-1;flex-wrap:wrap;justify-content:flex-end}@media(max-width:640px){.site-cookie-notice{grid-template-columns:minmax(0,1fr);gap:12px}.site-cookie-notice>div:last-child{justify-content:flex-start}}
+
+.featured-projects .project-card {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #dce5ed;
+  border-radius: 16px;
+  background: white;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+.featured-projects .project-card:hover,
+.featured-projects .project-card:focus-visible { border-color: var(--accent-color); }
+.featured-projects .project-card img { width: 100%; aspect-ratio: 1.89; object-fit: cover; display: block; }
+.featured-projects .project-card h3 { font-size: 1.375rem; margin-bottom: .65rem; }
+.featured-projects .project-card p { color: #475569; }
+.featured-projects .project-card .p-4 > span { color: var(--accent-color); font-weight: 600; text-decoration: underline; }
